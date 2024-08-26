@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concentric Progress Rings with Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a; /* Dark background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 786px;
+            height: 425px;
+            background-color: #1c1c1c; /* Dark background for the container */
+            border-radius: 20px; /* Rounded corners */
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto; /* Enable vertical scrolling */
+            overflow-x: hidden; /* Disable horizontal scrolling */
+            position: relative;
+            border: 2px solid transparent; /* Initially transparent border */
+            transition: transform 1s; /* Hover animation time */
+        }
+
+        .container:hover {
+            transform: scale(1.05); /* Hover size */
+            border-color: #945219; 
+            box-shadow: 0 0 15px #945219; /* Border for the glow effect on hover */
+        }
+
+        h1 {
+            text-align: center;
+            color: #945219; /* Orange color for the title */
+            margin-top: 0;
+        }
+
+        /* SVG styles for concentric progress rings */
+        svg {
+            display: block;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        circle {
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.3s ease; /* Smooth transition for dash offset */
+        }
+
+        /* Animation for progress rings */
+        @keyframes dash {
+            from {
+                stroke-dashoffset: 0;
+            }
+            to {
+                stroke-dashoffset: 10;
+            }
+        }
+
+        .plusButton {
+            /* Config start */
+            font-family: Arial, sans-serif;
+            --plus_sideLength: 2.5rem;
+            --plus_topRightTriangleSideLength: 0.9rem;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid white;
+            width: var(--plus_sideLength);
+            height: var(--plus_sideLength);
+            background-color: #000000;
+            overflow: hidden;
+            left: 700px;
+            bottom: 10px;
+            border-radius: 50%;
+        }
+
+        .plusButton::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
+            border-style: solid;
+            border-color: transparent white transparent transparent;
+            transition-timing-function: ease-in-out;
+            transition-duration: 0.2s;
+        }
+
+        .plusButton:hover {
+            cursor: pointer;
+        }
+
+        .plusButton:hover::before {
+            --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+        }
+
+        .plusButton:focus-visible::before {
+            --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+        }
+
+        .plusButton>.plusIcon {
+            fill: white;
+            width: calc(var(--plus_sideLength) * 0.7);
+            height: calc(var(--plus_sideLength) * 0.7);
+            z-index: 1;
+            transition-timing-function: ease-in-out;
+            transition-duration: 0.2s;
+        }
+
+        .plusButton:hover>.plusIcon {
+            fill: black;
+            transform: rotate(180deg);
+        }
+
+        .plusButton:focus-visible>.plusIcon {
+            fill: black;
+            transform: rotate(180deg);
+        }
+
+        .card {
+            width: 510px;
+            height: 254px;
+            border-radius: 4px;
+            background: #212121;
+            display: flex;
+            gap: 5px;
+            padding: .4em;
+            display: none; /* Initially hidden */
+            margin-left: 15%;
+        }
+
+        .card p {
+            height: 100%;
+            flex: 1;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all .5s;
+            background: #212121;
+            border: 1px solid #ff5a91;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card p:hover {
+            flex: 4;
+        }
+
+        .card p span {
+            min-width: 14em;
+            padding: .5em;
+            text-align: center;
+            transform: rotate(-90deg);
+            transition: all .5s;
+            text-transform: uppercase;
+            color: #ff568e;
+            letter-spacing: .1em;
+        }
+
+        .card p:hover span {
+            transform: rotate(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Concentric Progress Rings</h1>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="progressRings">
+            <!-- Define linear gradients for each ring -->
+            <defs>
+                <linearGradient id="GradientColor1">
+                    <stop offset="0%" stop-color="#e91e63" />
+                    <stop offset="100%" stop-color="#673ab7" />
+                </linearGradient>
+                <linearGradient id="GradientColor2">
+                    <stop offset="0%" stop-color="#4caf50" />
+                    <stop offset="100%" stop-color="#8bc34a" />
+                </linearGradient>
+                <linearGradient id="GradientColor3">
+                    <stop offset="0%" stop-color="#2196f3" />
+                    <stop offset="100%" stop-color="#03a9f4" />
+                </linearGradient>
+                <linearGradient id="GradientColor4">
+                    <stop offset="0%" stop-color="#ff9800" />
+                    <stop offset="100%" stop-color="#ff5722" />
+                </linearGradient>
+                <linearGradient id="GradientColor5">
+                    <stop offset="0%" stop-color="#9c27b0" />
+                    <stop offset="100%" stop-color="#673ab7" />
+                </linearGradient>
+            </defs>
+
+            <!-- Outermost circle -->
+            <circle cx="150" cy="150" r="130" stroke="#ddd" stroke-width="0" fill="none" />
+
+            <!-- Circle for Ring 1 -->
+            <circle id="ring1" cx="150" cy="150" r="110" stroke="url(#GradientColor1)" stroke-width="20" fill="transparent"
+                    stroke-dasharray="692" stroke-dashoffset="692" /* Total circumference: 2 * Math.PI * 110 = 692.8 */
+                    transform="rotate(-90, 150, 150)">
+            </circle>
+
+            <!-- Circle for Ring 2 -->
+            <circle id="ring2" cx="150" cy="150" r="90" stroke="url(#GradientColor2)" stroke-width="20" fill="transparent"
+                    stroke-dasharray="565" stroke-dashoffset="565" /* Total circumference: 2 * Math.PI * 90 = 565.4 */
+                    transform="rotate(-90, 150, 150)">
+            </circle>
+
+            <!-- Circle for Ring 3 -->
+            <circle id="ring3" cx="150" cy="150" r="70" stroke="url(#GradientColor3)" stroke-width="20" fill="transparent"
+                    stroke-dasharray="440" stroke-dashoffset="440" /* Total circumference: 2 * Math.PI * 70 = 439.8 */
+                    transform="rotate(-90, 150, 150)">
+            </circle>
+
+            <!-- Circle for Ring 4 -->
+            <circle id="ring4" cx="150" cy="150" r="50" stroke="url(#GradientColor4)" stroke-width="20" fill="transparent"
+                    stroke-dasharray="314" stroke-dashoffset="314" /* Total circumference: 2 * Math.PI * 50 = 314.2 */
+                    transform="rotate(-90, 150, 150)">
+            </circle>
+
+            <!-- Circle for Ring 5 -->
+            <circle id="ring5" cx="150" cy="150" r="30" stroke="url(#GradientColor5)" stroke-width="20" fill="transparent"
+                    stroke-dasharray="188" stroke-dashoffset="188" /* Total circumference: 2 * Math.PI * 30 = 188.4 */
+                    transform="rotate(-90, 150, 150)">
+            </circle>
+        </svg>
+        
+        <!-- Card that replaces the progress rings -->
+        <div id="card" class="card">
+            <p><span>ADA</span></p>
+            <p><span>DBMS</span></p>
+            <p><span>CG & V</span></p>
+            <p><span>O T</span></p>
+            <p><span>Biology</span></p>
+
+        </div>
+        
+        
+        <!-- Plus Button -->
+        <div id="plusButton" class="plusButton" tabindex="0">
+            <svg class="plusIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+              <g mask="url(#mask0_21_345)">
+                <path d="M13.75 23.75V16.25H6.25V13.75H13.75V6.25H16.25V13.75H23.75V16.25H16.25V23.75H13.75Z"></path>
+              </g>
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    function updateProgress(p1, p2, p3, p4, p5) {
+        // Total circumferences for each ring
+        const circumferences = {
+            ring1: 2 * Math.PI * 110, // 692.8
+            ring2: 2 * Math.PI * 90,  // 565.4
+            ring3: 2 * Math.PI * 70,  // 439.8
+            ring4: 2 * Math.PI * 50,  // 314.2
+            ring5: 2 * Math.PI * 30   // 188.4
+        };
+
+        document.getElementById('ring1').style.strokeDashoffset = circumferences.ring1 - (circumferences.ring1 * p1 / 100);
+        document.getElementById('ring2').style.strokeDashoffset = circumferences.ring2 - (circumferences.ring2 * p2 / 100);
+        document.getElementById('ring3').style.strokeDashoffset = circumferences.ring3 - (circumferences.ring3 * p3 / 100);
+        document.getElementById('ring4').style.strokeDashoffset = circumferences.ring4 - (circumferences.ring4 * p4 / 100);
+        document.getElementById('ring5').style.strokeDashoffset = circumferences.ring5 - (circumferences.ring5 * p5 / 100);
+    }
+
+    updateProgress(90, 100, 10, 100, 10); // Update rings with new progress values
+
+    // Toggle between progress rings and card
+    document.getElementById('plusButton').addEventListener('click', function() {
+        const progressRings = document.querySelector('svg');
+        const card = document.getElementById('card');
+
+        if (progressRings.style.display === 'none' || progressRings.style.display === '') {
+            progressRings.style.display = 'block';
+            card.style.display = 'none';
+            // Ensure hover element is replaced by progress rings
+            document.getElementById('card').style.display = 'none';
+        } else {
+            progressRings.style.display = 'none';
+            card.style.display = 'flex';
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

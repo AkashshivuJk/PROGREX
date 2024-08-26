@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}">
+  <style>
+    @import url(“test.css”);
+  </style>
+</head>
+
+<body>
+  <header class="ScriptHeader">
+    <div class="rt-container">
+      <div class="col-rt-12">
+        <div class="rt-heading">
+          <h1>Profile</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="rt-container">
+      <div class="col-rt-12">
+        <div class="Scriptcontent">
+
+          <!-- Student Profile -->
+          <div class="student-profile py-4">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="card shadow-sm">
+                    <div class="card-header bg-transparent text-center">
+                      <img class="profile_img" src="{{ url_for('static', filename='ved.jpg') }}" alt="student dp">
+                      <h3>
+
+                        <head>
+                          <meta charset="UTF-8">
+                          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                          <title>Events</title>
+                          <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}" />
+                          <link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}">
+                          <link rel="stylesheet"
+                            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+                        </head>Vedank Vansia
+                      </h3>
+                    </div>
+                    <div class="card-body">
+                      <p class="mb-0"><strong class="pr-1">Student ID:</strong>1DT22CG045</p>
+                      <p class="mb-0"><strong class="pr-1">Semester:</strong>4</p>
+                      <p class="mb-0"><strong class="pr-1">Section:</strong>A</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="card shadow-sm">
+                    <div class="card-header bg-transparent border-0">
+                      <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
+                    </div>
+                    <div class="card-body pt-0">
+                      <table class="table table-bordered">
+                        <tr>
+                          <th width="30%">Roll</th>
+                          <td width="2%">:</td>
+                          <td>45</td>
+                        </tr>
+                        <tr>
+                          <th width="30%">Academic Year </th>
+                          <td width="2%">:</td>
+                          <td>2024</td>
+                        </tr>
+                        <tr>
+                          <th width="30%">Department</th>
+                          <td width="2%">:</td>
+                          <td>CSD</td>
+                        </tr>
+                        <tr>
+                          <th width="30%">Gmail</th>
+                          <td width="2%">:</td>
+                          <td>abc@gmail.com</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                  <div style="height: 26px"></div>
+                  <div class="card shadow-sm">
+                    <div class="card-header bg-transparent border-0">
+                      <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
+                    </div>
+                    <div class="card-body pt-0">
+                      <p>Hi, I'm Vedank, a 4th-semester engineering student studying Computer Science and Design. I have
+                        a strong passion for UI/UX design, and I’m dedicated to creating intuitive and engaging user
+                        experiences. My goal is to blend technical skills with design principles to improve how users
+                        interact with digital products. I'm excited about the endless possibilities in the field of
+                        design and look forward to applying my knowledge to real-world projects.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>

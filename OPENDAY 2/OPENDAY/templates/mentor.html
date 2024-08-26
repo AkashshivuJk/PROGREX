@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Info Block</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a; /* Dark background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .mentor-info {
+            width: 454px; /* Adjusted width */
+            height: 590px; /* Adjusted height */
+            background-color: #1c1c1c; /* Dark background for the container */
+            border-radius: 20px; /* Rounded corners */
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto; /* Enable vertical scrolling */
+            overflow-x: hidden; /* Disable horizontal scrolling */
+            position: relative;
+            transition: transform 1s, border 0.3s, box-shadow 0.3s; /* Transition for border and shadow */
+        }
+
+        .mentor-info:hover {
+            transform: scale(1.05); /* Hover +hover size */
+            border: 2px solid #945219; /* Border for the glow effect */
+            box-shadow: 0 0 15px #945219; /* Glowing shadow effect */
+        }
+
+        .mentor-info h2 {
+            text-align: center;
+            color: #945219; /* Orange color for the title */
+            margin-top: 0;
+        }
+
+        .mentor-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            color: #fff; /* White text color */
+        }
+
+        .mentor-details img {
+            width: 150px; /* Adjusted photo size */
+            height: 150px; /* Adjusted photo size */
+            border-radius: 50%; /* Circular border for photo */
+            margin-bottom: 10px;
+        }
+
+        .mentor-details p {
+            margin: 5px 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .action-buttons button {
+            margin: 0 10px;
+            padding: 10px;
+            border: 1px solid #945219;
+            border-radius: 10px;
+            background-color: #945219;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .action-buttons button:hover {
+            background-color: #b35426;
+            box-shadow: 0 0 10px #945219;
+        }
+    </style>
+</head>
+<body>
+    <div class="mentor-info">
+        <h2>Mentor Information</h2>
+        <div class="mentor-details">
+            <img src="profile.jpg" alt="Mentor Photo">
+            <p>Name: Akash Singh J</p>
+            <p>Designation: HOD, Dept of CSD</p>
+            <p>College: DSATM</p>
+        </div>
+        <div class="action-buttons">
+            <button onclick="alert('+91 8095268933')">Call</button>
+            <button onclick="alert('Akashshivu.jk@gmail.com')">Email</button>
+        </div>
+    </div>
+</body>
+</html>

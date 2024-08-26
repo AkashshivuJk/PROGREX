@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Block</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 783px;
+            height: 364.3px;
+            background-color: #1a1a1a;
+            border-radius: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            transition: transform 1s, border 0.3s, box-shadow 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: #945219;
+            margin-top: 0;
+        }
+
+        .event {
+            background-color: #444444;
+            border: 1px solid #464646;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            color: #fff;
+            box-shadow: inset 0 0 5px #00000080;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+
+        .event:hover,
+        .event:focus {
+            box-shadow: 0 0 10px #945219, 0 0 15px #945219;
+            background-color: #464646;
+        }
+
+        .event::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: #945219;
+            box-shadow: 0 0 10px #945219, 0 0 20px #945219;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .event:hover::after,
+        .event:focus::after {
+            opacity: 1;
+        }
+
+        .date {
+            font-weight: bold;
+            color: #945219;
+        }
+
+        .details {
+            color: #ddd;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #945219;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1c1c1c;
+        }
+
+        .scroll-container {
+            overflow-y: auto;
+            max-height: 320px;
+        }
+
+        .scroll-container::after {
+            content: '';
+            display: block;
+            height: 20px;
+        }
+
+        .todo-block {
+            width: 100%;
+            height: 100%;
+            background-color: #1c1c1c;
+            border-radius: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border: 2px solid #000000;
+            transition: transform 1s, border 0.3s, box-shadow 0.3s;
+        }
+
+        .todo-block:hover {
+            transform: scale(1.05);
+            border: 2px solid #945219;
+            box-shadow: 0 0 15px #945219;
+        }
+
+        .todo-block h2 {
+            text-align: center;
+            color: #945219;
+            margin-top: 0;
+        }
+
+        .todo-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            max-height: 250px;
+        }
+
+        .todo-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .todo-list li input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        #new-item-input {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #464646;
+            border-radius: 10px;
+            background-color: #444444;
+            color: #f3e7e7;
+            margin-bottom: 10px;
+        }
+
+        button.noselect {
+            width: 150px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            background: #e62222;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+            margin-left: 70%;
+        }
+
+        button,
+        button span {
+            transition: 200ms;
+        }
+
+        button .text {
+            transform: translateX(35px);
+            color: white;
+            font-weight: bold;
+        }
+
+        button .icon {
+            position: absolute;
+            border-left: 1px solid #c41b1b;
+            transform: translateX(110px);
+            height: 40px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button svg {
+            width: 15px;
+            fill: #eee;
+        }
+
+        button:hover {
+            background: #ff3636;
+        }
+
+        button:hover .text {
+            color: transparent;
+        }
+
+        button:hover .icon {
+            width: 150px;
+            border-left: none;
+            transform: translateX(0);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button:active .icon svg {
+            transform: scale(0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="todo-block">
+            <h2>To-Do List</h2>
+            <input type="text" id="new-item-input" placeholder="Enter new Task😍">
+            <ul class="todo-list">
+            </ul>
+            <button class="noselect">
+                <span class="text">Delete</span>
+                <span class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const todoBlock = document.querySelector('.todo-block');
+        const todoList = document.querySelector('.todo-list');
+        const newItemInput = document.getElementById('new-item-input');
+        const deleteCompletedButton = document.querySelector('.noselect');
+
+        newItemInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && newItemInput.value.trim() !== '') {
+                const newItemText = newItemInput.value.trim();
+                const newItem = document.createElement('li');
+                newItem.innerHTML = `<input type="checkbox"><span style="color: #fff">${newItemText}</span>`;
+                todoList.appendChild(newItem);
+                newItemInput.value = '';
+            }
+        });
+
+        todoList.addEventListener('change', (e) => {
+            if (e.target.type === 'checkbox') {
+                const item = e.target.parentElement;
+                if (e.target.checked) {
+                    todoList.appendChild(item);
+                } else {
+                    todoList.insertBefore(item, todoList.firstChild);
+                }
+            }
+        });
+
+        deleteCompletedButton.addEventListener('click', () => {
+            const completedItems = Array.from(todoList.querySelectorAll('li input[type="checkbox"]:checked'))
+                .map(checkbox => checkbox.parentElement);
+
+            completedItems.forEach(item => {
+                setTimeout(() => {
+                    item.remove();
+                }, 500);
+            });
+        });
+    </script>
+</body>
+
+</html>

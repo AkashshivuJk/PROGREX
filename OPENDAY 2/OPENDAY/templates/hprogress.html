@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Progress </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 783px;
+            height: 364.3px;
+            background-color: #1c1c1c;
+            border-radius: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border: 2px solid #000000;
+            transition: transform 1s, border 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+            border: 2px solid #945219;
+            box-shadow: 0 0 15px #945219;
+        }
+
+        .progress-header {
+            text-align: center;
+            color: #945219;
+            margin-top: 0;
+        }
+
+        .progress-item {
+            background-color: #444444;
+            border: 1px solid #464646;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            color: #fff;
+            box-shadow: inset 0 0 5px #00000080;
+            position: relative;
+        }
+
+        .progress-item:hover {
+            box-shadow: 0 0 10px #945219, 0 0 15px #945219;
+            background-color: #464646;
+        }
+
+        .progress-item::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 4px;
+            background: #945219;
+            box-shadow: 0 0 10px #945219, 0 0 20px #945219;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .progress-item:hover::after {
+            opacity: 1;
+        }
+
+        .progress-title {
+            font-weight: bold;
+            color: #c7b3a1;
+        }
+
+        .progress-status {
+            color: #ddd;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #444;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 5px;
+            position: relative;
+        }
+
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background: #945219;
+            width: 0; /* This will be updated with JavaScript */
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="progress-header">Live Progress</h1>
+        <!-- Placeholder progress items -->
+        <div class="progress-item">
+            <div class="progress-title">HackerRank</div>
+            <div class="progress-status">Progress: <span id="progress1">0%</span></div>
+            <div class="progress-bar">
+                <span id="progress-bar1"></span>
+            </div>
+        </div>
+        <div class="progress-item">
+            <div class="progress-title">Leetcode</div>
+            <div class="progress-status">Progress: <span id="progress2">0%</span></div>
+            <div class="progress-bar">
+                <span id="progress-bar2"></span>
+            </div>
+        </div>
+        <!-- Add more progress items as needed -->
+    </div>
+
+    <script>
+        // Example: Update the progress bars with mock data
+        function updateProgress() {
+            // Replace these values with data from HackerRank API or another source
+            const progress1 = 75; // Example progress percentage
+            const progress2 = 50; // Example progress percentage
+
+            document.getElementById('progress1').textContent = progress1 + '%';
+            document.getElementById('progress-bar1').style.width = progress1 + '%';
+
+            document.getElementById('progress2').textContent = progress2 + '%';
+            document.getElementById('progress-bar2').style.width = progress2 + '%';
+        }
+
+        // Call the update function (could be triggered periodically)
+        updateProgress();
+    </script>
+</body>
+
+</html>

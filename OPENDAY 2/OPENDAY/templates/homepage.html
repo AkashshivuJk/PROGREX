@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+    html,
+    body {
+        font-family: 'Dongle', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    :root {
+        --color-bg1: #0D0D0D;
+        --color-bg2: #05001f;
+        --color1: 156, 195, 213;
+        --color2: 230, 154, 141;
+        --color3: 173, 239, 209;
+        --color4: 118, 82, 139;
+        --color5: 255, 214, 98;
+        --color-interactive: 10, 13, 54;
+        --circle-size: 80%;
+        --blending: hard-light;
+    }
+
+    @keyframes moveInCircle {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        50% {
+            transform: rotate(180deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes moveVertical {
+        0% {
+            transform: translateY(-50%);
+        }
+
+        50% {
+            transform: translateY(50%);
+        }
+
+        100% {
+            transform: translateY(-50%);
+        }
+    }
+
+    @keyframes moveHorizontal {
+        0% {
+            transform: translateX(-50%) translateY(-10%);
+        }
+
+        50% {
+            transform: translateX(50%) translateY(10%);
+        }
+
+        100% {
+            transform: translateX(-50%) translateY(-10%);
+        }
+    }
+
+
+    .gradient-bg {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+        top: 0;
+        left: 0;
+
+        svg {
+            display: none;
+        }
+
+
+        .gradients-container {
+            filter: url(#goo) blur(40px);
+            width: 100%;
+            height: 100%;
+        }
+
+        .g1 {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+
+            width: var(--circle-size);
+            height: var(--circle-size);
+            top: calc(50% - var(--circle-size) / 2);
+            left: calc(50% - var(--circle-size) / 2);
+
+            transform-origin: center center;
+            animation: moveVertical 30s ease infinite;
+
+            opacity: 0.7;
+        }
+
+        .g2 {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+
+            width: var(--circle-size);
+            height: var(--circle-size);
+            top: calc(50% - var(--circle-size) / 2);
+            left: calc(50% - var(--circle-size) / 2);
+
+            transform-origin: calc(50% - 400px);
+            animation: moveInCircle 20s reverse infinite;
+
+            opacity: 0.7;
+        }
+
+        .g3 {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+
+            width: var(--circle-size);
+            height: var(--circle-size);
+            top: calc(50% - var(--circle-size) / 2 + 200px);
+            left: calc(50% - var(--circle-size) / 2 - 500px);
+
+            transform-origin: calc(50% + 400px);
+            animation: moveInCircle 40s linear infinite;
+
+            opacity: 0.7;
+        }
+
+        .g4 {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+
+            width: var(--circle-size);
+            height: var(--circle-size);
+            top: calc(50% - var(--circle-size) / 2);
+            left: calc(50% - var(--circle-size) / 2);
+
+            transform-origin: calc(50% - 200px);
+            animation: moveHorizontal 40s ease infinite;
+
+            opacity: 0.7;
+        }
+
+        .g5 {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+
+            width: calc(var(--circle-size) * 0.7);
+            height: calc(var(--circle-size) * 0.7);
+            top: calc(50% - var(--circle-size));
+            left: calc(50% - var(--circle-size));
+
+            transform-origin: calc(50% - 800px) calc(50% + 200px);
+            animation: moveInCircle 20s ease infinite;
+
+            opacity: 0.7;
+        }
+
+        .cursor {
+            width: 50%;
+            height: 50%;
+            border-radius: 50%;
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
+            mix-blend-mode: var(--blending);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            opacity: 0.7;
+        }
+    }
+
+    .navbox {
+        position: fixed;
+        top: 0px;
+        background-color: transparent;
+        left: 0px;
+        width: 100%;
+        height: 20%;
+        overflow: hidden;
+        z-index: 2;
+        color: beige;
+    }
+
+    h1 {
+        color: beige;
+        text-align: center;
+    }
+
+    h2 {
+        color: beige;
+        text-align: center;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /* Center items vertically */
+        background-color: transparent;
+        padding: 10px 20px;
+    }
+
+    .navbar-center,
+    .navbar-right {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        /* Center items vertically */
+    }
+
+    .navbar-center li,
+    .navbar-right li {
+        margin: 0 15px;
+    }
+
+    .navbar a {
+        color: beige;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .navbar a:hover {
+        color: #ffffff;
+    }
+
+
+    .notification {
+        background-color: transparent;
+        color: white;
+        text-decoration: none;
+        padding: 15px 26px;
+        position: relative;
+        display: inline-block;
+        border-radius: 2px;
+        overflow: auto;
+    }
+
+    .navbar .dropdown {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f900;
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+    }
+
+    .navbar .dropdown a {
+        color: beige;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .navbar .dropdown a:hover {
+        background-color: transparent;
+        color: white;
+    }
+
+    .navbar .dropdown-toggle:hover .dropdown {
+        display: block;
+    }
+
+    .fas.fa-bell::after {
+        content: '▼';
+        font-size: 10px;
+        color: white;
+        margin-left: 5px;
+    }
+
+    .wrapper {
+        z-index: 1;
+        display: grid;
+        position: fixed;
+        width: 95%;
+        top: 12.5%;
+        left: 2.5%;
+        margin: 20px auto;
+        max-width: 1920px;
+        grid-template-columns: repeat(34, 1fr);
+        grid-auto-rows: minmax(50px, 80px);
+        grid-gap: 20px;
+        background: transparent;
+    }
+
+    .grid1,
+    .grid2,
+    .grid3,
+    .grid4,
+    .grid5,
+    .grid6 {
+        background-color: transparent;
+        border-radius: 10px;
+        box-shadow: 5px 5px 7px #c3fff999;
+        backdrop-filter: blur(15px);
+        transition: transform 1.25s;
+    }
+
+    .grid1:hover,
+    .grid2:hover,
+    .grid3:hover,
+    .grid4:hover,
+    .grid5:hover,
+    .grid6:hover {
+        transform: scale(1.04);
+        border-color: #d3d3d3;
+        box-shadow: 5px 5px 10px #40e0d096;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .grid1 {
+        grid-column: 1 / 10;
+        grid-row: 1 / 4;
+        overflow: auto;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .progress-item {
+        background-color: transparent;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        color: wheat;
+        position: relative;
+    }
+
+    .progress-item::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -5px;
+        width: 80%;
+        height: 4px;
+        border-radius: 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .progress-bar {
+        width: 95%;
+        height: 10px;
+        background: #444;
+        border-radius: 5px;
+        overflow: auto;
+        margin-top: 5px;
+        position: relative;
+    }
+
+    .progress-bar span {
+        display: block;
+        height: 100%;
+        background: teal;
+        width: 0;
+        /* This will be updated with JavaScript */
+        transition: width 0.3s;
+    }
+
+    .grid2 {
+        grid-column: 10 / 27;
+        grid-row: 1 / 5;
+        overflow: auto;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    svg {
+        display: block;
+        width: 50%;
+        height: 80%;
+        margin: 0 auto;
+    }
+
+    circle {
+        stroke-linecap: round;
+        transition: stroke-dashoffset 1s ease;
+
+    }
+
+
+
+    .plusButton {
+
+        font-family: Arial, sans-serif;
+        --plus_sideLength: 2.5rem;
+        --plus_topRightTriangleSideLength: 0.9rem;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid white;
+        width: var(--plus_sideLength);
+        height: var(--plus_sideLength);
+        background-color: #000000;
+        overflow: hidden;
+        left: 90%;
+        bottom: -10px;
+        border-radius: 50%;
+    }
+
+    .plusButton::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
+        border-style: solid;
+        border-color: transparent white transparent transparent;
+        transition-timing-function: ease-in-out;
+        transition-duration: 0.2s;
+    }
+
+    .plusButton:hover {
+        cursor: pointer;
+    }
+
+    .plusButton:hover::before {
+        --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+    }
+
+    .plusButton:focus-visible::before {
+        --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+    }
+
+    .plusButton>.plusIcon {
+        fill: white;
+        width: calc(var(--plus_sideLength) * 0.7);
+        height: calc(var(--plus_sideLength) * 0.7);
+        z-index: 1;
+        transition-timing-function: ease-in-out;
+        transition-duration: 0.2s;
+    }
+
+    .plusButton:hover>.plusIcon {
+        fill: black;
+        transform: rotate(180deg);
+    }
+
+    .plusButton:focus-visible>.plusIcon {
+        fill: black;
+        transform: rotate(180deg);
+    }
+
+    .card {
+        width: 95%;
+        height: 90%;
+        border-radius: 4px;
+        background: #00000000;
+        display: grid;
+        gap: 5px;
+        padding: 10px;
+        display: none;
+
+    }
+
+    .card p {
+        height: 65%;
+        flex: 1;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 2px;
+        transition: all .5s;
+        background: rgba(0, 0, 0, 0);
+        border: 1px solid #94fbfd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card p:hover {
+        flex: 4;
+    }
+
+    .card p span {
+        min-width: 20%;
+        text-align: center;
+        transform: rotate(-90deg);
+        transition: all 1.25s;
+        text-transform: uppercase;
+        color: #56fff4;
+        letter-spacing: .1em;
+    }
+
+    .card p:hover span {
+        transform: rotate(0);
+    }
+    #progressRings {
+    display: block;
+    width: 300px;
+    height: 300px;
+}
+
+.card {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .grid3 {
+        grid-column: 27 / 37;
+        grid-row: 1 / 4;
+        overflow: auto;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .todo-block {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        border-radius: 20px;
+        padding: 20px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .todo-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        max-height: 250px;
+    }
+
+    .todo-list li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .todo-list li input[type="checkbox"] {
+        margin-right: 10px;
+    }
+
+    #new-item-input {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #464646;
+        border-radius: 10px;
+        background-color: #444444;
+        color: #f3e7e7;
+        margin-bottom: 10px;
+    }
+
+    .noselect {
+        width: 100px;
+        height: 33px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        background: #e62222;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+        margin-left: 60%;
+    }
+
+    .noselect,
+    .noselect span {
+        transition: 200ms;
+    }
+
+    .noselect .text {
+        transform: translateX(20px);
+        color: white;
+        font-weight: bold;
+    }
+
+    .noselect .icon {
+        position: absolute;
+        transform: translateX(65px);
+        height: 33px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .noselect svg {
+        width: 15px;
+        fill: #eee;
+    }
+
+    .noselect:hover {
+        background: #ff3636;
+    }
+
+    .noselect:hover .icon {
+        width: 100px;
+        border-left: none;
+        transform: translateX(0);
+    }
+
+    .noselect:focus {
+        outline: none;
+    }
+
+    .noselect:active .icon svg {
+        transform: scale(0.8);
+    }
+
+    .grid4 {
+        grid-column: 1 / 10;
+        grid-row: 4/ 8;
+    }
+
+    .mentor-info {
+        width: 100%;
+        /* Adjusted width */
+        height: 100%;
+        /* Adjusted height */
+        background-color: transparent;
+        /* Dark background for the container */
+        box-sizing: border-box;
+        overflow-y: auto;
+        overflow-x: hidden;
+        /* Disable horizontal scrolling */
+        position: relative;
+    }
+
+    .mentor-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        color: #fff;
+        /* White text color */
+    }
+
+    .mentor-details img {
+        width: 150px;
+        /* Adjusted photo size */
+        height: 150px;
+        /* Adjusted photo size */
+        border-radius: 50%;
+        /* Circular border for photo */
+        margin-bottom: 10px;
+    }
+
+    .mentor-details p {
+        margin: 5px 0;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .action-buttons button {
+        margin: 0 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #007874;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .grid5 {
+        grid-column: 10 / 27;
+        grid-row: 5 / 8;
+        overflow: auto;
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .week {
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .date {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        color: #40E0D0;
+        padding: 5% 5%;
+        border: #40E0D0 2px;
+        border-radius: 5px;
+        width: 4.17%;
+        height: 5.5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .details {
+        padding: 5%;
+        position: relative;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+    }
+
+    .grid6 {
+        grid-column: 27 / 37;
+        grid-row: 4 / 8;
+    }
+
+    .assignment {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        color: #ffffff;
+    }
+
+    .assignment:last-child {
+        border-bottom: none;
+    }
+
+    .status {
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 14px;
+        text-transform: uppercase;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .pending {
+        background-color: #ffcc007c;
+        color: #fff;
+    }
+
+    .submitted {
+        background-color: #4caf4f6e;
+        color: #fff;
+    }
+    .progress-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+svg {
+    width: 50%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+.legend {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    margin-left: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: wheat;
+    padding: 0px 25px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.legend-label {
+    font-family: Helvetica, Arial, sans-serif;
+    color: wheat
+}
+
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    a,
+    a:visited,
+    a:hover,
+    a:active {
+        color: inherit;
+    }
+    .user h1{
+        color: white;
+        justify-content: center;
+        top:14.2%;
+        z-index: 3;
+    }
+</style>
+
+<body>
+    <div class="gradient-bg">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="goo">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+                        result="goo" />
+                    <feBlend in="SourceGraphic" in2="goo" />
+                </filter>
+            </defs>
+        </svg>
+        <div class="gradients-container">
+            <div class="g1"></div>
+            <div class="g2"></div>
+            <div class="g3"></div>
+            <div class="g4"></div>
+            <div class="g5"></div>
+            <div class="cursor">
+                <script src="{{ url_for('static', filename='test.js') }}"></script>
+            </div>
+        </div>
+        <div class="navbox">
+            <nav class="navbar">
+                <ul class="navbar-center">
+                    <li class="Home"><a href="{{ url_for('homee') }}">Home</a></li>
+                    <li><a href="{{ url_for('notes_page') }}">Notes</a></li>
+                    <li><a href="{{ url_for('playlist_page') }}">Playlist</a></li>
+                    <li><a href="{{ url_for('portfolio_page') }}">Portfolio</a></li>
+                    <li><a href="{{ url_for('events_page') }}">Events</a></li>
+                    <li><a href="{{ url_for('about_page') }}">About</a></li>
+                </ul>
+                <ul class="navbar-right">
+                    <li class="dropdown-toggle"><a href="#"><i class="fas fa-bell"></i> <span>3</span></a>
+                        <div class="dropdown">
+                            <a class="notif" href="#">Notification 1</a>
+                            <a class="notif" href="#">Notification 2</a>
+                            <a class="notif" href="#">Notification 3</a>
+                        </div>
+                    </li>
+                    <li><a href="{{ url_for('profile') }}"><i class="fas fa-user"></i></a></li>
+                    <li><a href="/logout"><i class="fas fa-sign-out-alt"></i>
+                        </a></li>
+                </ul>
+            </nav>
+            <h1 class="user">Welcome ,{{ name }}!!</h1>
+        </div>
+        <h1 class="user">Welcome ,{{ name }}!!</h1>
+        <div class="wrapper">
+            <div class="grid1">
+                <div class="container">
+                    <h1>Live Progress</h1>
+                    <!-- Placeholder progress items -->
+                    <div class="progress-item">
+                        <a href="https://www.hackerrank.com/">
+                            <div class="progress-title">HackerRank</div>
+                            <div class="progress-status">Progress: <span id="progress1">0%</span></div>
+                            <div class="progress-bar">
+                                <span id="progress-bar1"></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="progress-item">
+                        <a href="https://leetcode.com/problemset/">
+                            <div class="progress-title">Leetcode</div>
+                            <div class="progress-status">Progress: <span id="progress2">0%</span></div>
+                            <div class="progress-bar">
+                                <span id="progress-bar2"></span>
+                            </div>
+                        </a>
+                    </div>
+                    <script>
+                        // Example: Update the progress bars with mock data
+                        function updateProgress() {
+                            // Replace these values with data from HackerRank API or another source
+                            const progress1 = 75; // Example progress percentage
+                            const progress2 = 50; // Example progress percentage
+
+                            document.getElementById('progress1').textContent = progress1 + '%';
+                            document.getElementById('progress-bar1').style.width = progress1 + '%';
+
+                            document.getElementById('progress2').textContent = progress2 + '%';
+                            document.getElementById('progress-bar2').style.width = progress2 + '%';
+                        }
+
+                        // Call the update function (could be triggered periodically)
+                        updateProgress();
+                    </script>
+                    <!-- Add more progress items as needed -->
+                </div>
+            </div>
+
+            <div class="grid2">
+                <div class="container">
+                    <h1>Academic Progress</h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="progressRings">
+                        <!-- Define linear gradients for each ring -->
+                        <defs>
+                            <linearGradient id="GradientColor1">
+                                <stop offset="0%" stop-color="#e91e63" />
+                                <stop offset="100%" stop-color="#673ab7" />
+                            </linearGradient>
+                            <linearGradient id="GradientColor2">
+                                <stop offset="0%" stop-color="#4caf50" />
+                                <stop offset="100%" stop-color="#8bc34a" />
+                            </linearGradient>
+                            <linearGradient id="GradientColor3">
+                                <stop offset="0%" stop-color="#2196f3" />
+                                <stop offset="100%" stop-color="#03a9f4" />
+                            </linearGradient>
+                            <linearGradient id="GradientColor4">
+                                <stop offset="0%" stop-color="#ff9800" />
+                                <stop offset="100%" stop-color="#ff5722" />
+                            </linearGradient>
+                            <linearGradient id="GradientColor5">
+                                <stop offset="0%" stop-color="#9c27b0" />
+                                <stop offset="100%" stop-color="#673ab7" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Outermost circle -->
+                        <circle cx="150" cy="150" r="130" stroke="#ddd" stroke-width="0" fill="none" />
+
+                        <!-- Circle for Ring 1 -->
+                        <circle id="ring1" cx="150" cy="150" r="110" stroke="url(#GradientColor1)" stroke-width="20"
+                            fill="transparent" stroke-dasharray="692" stroke-dashoffset="692" /* Total circumference: 2
+                            * Math.PI * 110=692.8 */ transform="rotate(-90, 150, 150)">
+                        </circle>
+
+                        <!-- Circle for Ring 2 -->
+                        <circle id="ring2" cx="150" cy="150" r="90" stroke="url(#GradientColor2)" stroke-width="20"
+                            fill="transparent" stroke-dasharray="565" stroke-dashoffset="565" /* Total circumference: 2
+                            * Math.PI * 90=565.4 */ transform="rotate(-90, 150, 150)">
+                        </circle>
+
+                        <!-- Circle for Ring 3 -->
+                        <circle id="ring3" cx="150" cy="150" r="70" stroke="url(#GradientColor3)" stroke-width="20"
+                            fill="transparent" stroke-dasharray="440" stroke-dashoffset="440" /* Total circumference: 2
+                            * Math.PI * 70=439.8 */ transform="rotate(-90, 150, 150)">
+                        </circle>
+
+                        <!-- Circle for Ring 4 -->
+                        <circle id="ring4" cx="150" cy="150" r="50" stroke="url(#GradientColor4)" stroke-width="20"
+                            fill="transparent" stroke-dasharray="314" stroke-dashoffset="314" /* Total circumference: 2
+                            * Math.PI * 50=314.2 */ transform="rotate(-90, 150, 150)">
+                        </circle>
+
+                        <!-- Circle for Ring 5 -->
+                        <circle id="ring5" cx="150" cy="150" r="30" stroke="url(#GradientColor5)" stroke-width="20"
+                            fill="transparent" stroke-dasharray="188" stroke-dashoffset="188" /* Total circumference: 2
+                            * Math.PI * 30=188.4 */ transform="rotate(-90, 150, 150)">
+                        </circle>
+                    </svg>
+                    <div class="legend" style="margin-top: 33px;
+                    margin-right: 127px;">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: linear-gradient(to right, #e91e63, #673ab7);"></span>
+                            <span class="legend-label">ADA</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: linear-gradient(to right, #4caf50, #8bc34a);"></span>
+                            <span class="legend-label">DBMS</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: linear-gradient(to right, #2196f3, #03a9f4);"></span>
+                            <span class="legend-label">CG&V</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: linear-gradient(to right, #ff9800, #ff5722);"></span>
+                            <span class="legend-label">OT</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background: linear-gradient(to right, #9c27b0, #673ab7);"></span>
+                            <span class="legend-label">BIO</span>
+                        </div>
+                    </div>
+
+                    <!-- Card that replaces the progress rings -->
+                    <div id="card" class="card">
+                        {% for subject, progress in progress.items() %}
+                        <p><span>
+                                <label>{{ subject}}</label><br><br><br>
+                                {{ progress }}% completed</span></p>
+                        {% endfor %}
+                    </div>
+
+
+
+                    <!-- Plus Button -->
+                    <div id="plusButton" class="plusButton" tabindex="0">
+                        <svg class="plusIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+                            <g mask="url(#mask0_21_345)">
+                                <path
+                                    d="M13.75 23.75V16.25H6.25V13.75H13.75V6.25H16.25V13.75H23.75V16.25H16.25V23.75H13.75Z">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        function updateProgress(p1, p2, p3, p4, p5) {
+                            // Total circumferences for each ring
+                            const circumferences = {
+                                ring1: 2 * Math.PI * 110, // 692.8
+                                ring2: 2 * Math.PI * 90,  // 565.4
+                                ring3: 2 * Math.PI * 70,  // 439.8
+                                ring4: 2 * Math.PI * 50,  // 314.2
+                                ring5: 2 * Math.PI * 30   // 188.4
+                            };
+
+                            document.getElementById('ring1').style.strokeDashoffset = circumferences.ring1 - (circumferences.ring1 * p1 / 100);
+                            document.getElementById('ring2').style.strokeDashoffset = circumferences.ring2 - (circumferences.ring2 * p2 / 100);
+                            document.getElementById('ring3').style.strokeDashoffset = circumferences.ring3 - (circumferences.ring3 * p3 / 100);
+                            document.getElementById('ring4').style.strokeDashoffset = circumferences.ring4 - (circumferences.ring4 * p4 / 100);
+                            document.getElementById('ring5').style.strokeDashoffset = circumferences.ring5 - (circumferences.ring5 * p5 / 100);
+                        }
+
+                        // Extract progress values from the Flask context
+                        var progressValues = [
+                            {% for subject, progress in progress.items() %}
+                                {{ progress }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                            ];
+
+                    // Call updateProgress with the extracted progress values
+                    updateProgress(...progressValues);
+
+                    // Toggle between progress rings and card
+                    document.getElementById('plusButton').addEventListener('click', function () {
+                        const progressRings = document.querySelector('svg');
+                        const card = document.getElementById('card');
+
+                        if (progressRings.style.display === 'none' || progressRings.style.display === '') {
+                            progressRings.style.display = 'block';
+                            card.style.display = 'none';
+                            // Ensure hover element is replaced by progress rings
+                            document.getElementById('card').style.display = 'none';
+                        } else {
+                            progressRings.style.display = 'none';
+                            card.style.display = 'flex';
+                        }
+                    });
+                        });
+                </script>
+            </div>
+            <div class="grid3">
+                <div class="container">
+                    <div class="todo-block">
+                        <h1>To-Do List</h1>
+                        <input type="text" id="new-item-input" placeholder="Enter new Task....">
+                        <ul class="todo-list">
+                        </ul>
+                        <button class="noselect">
+                            <span class="text">Delete</span>
+                            <span class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path
+                                        d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z">
+                                    </path>
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <script>
+                    const todoBlock = document.querySelector('.todo-block');
+                    const todoList = document.querySelector('.todo-list');
+                    const newItemInput = document.getElementById('new-item-input');
+                    const deleteCompletedButton = document.querySelector('.noselect');
+                    newItemInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter' && newItemInput.value.trim() !== '') {
+                            const newItemText = newItemInput.value.trim();
+                            const newItem = document.createElement('li');
+                            newItem.innerHTML = `<input type="checkbox"><span style="color: #fff">${newItemText}</span>`;
+                            todoList.appendChild(newItem);
+                            newItemInput.value = '';
+                        }
+                    });
+
+                    todoList.addEventListener('change', (e) => {
+                        if (e.target.type === 'checkbox') {
+                            const item = e.target.parentElement;
+                            if (e.target.checked) {
+                                todoList.appendChild(item);
+                            } else {
+                                todoList.insertBefore(item, todoList.firstChild);
+                            }
+                        }
+                    });
+
+                    deleteCompletedButton.addEventListener('click', () => {
+                        const completedItems = Array.from(todoList.querySelectorAll('li input[type="checkbox"]:checked'))
+                            .map(checkbox => checkbox.parentElement);
+
+                        completedItems.forEach(item => {
+                            setTimeout(() => {
+                                item.remove();
+                            }, 500);
+                        });
+                    });
+                </script>
+            </div>
+            <div class="grid4">
+                <div class="mentor-info">
+                    <h1>Mentor Information</h1>
+                    <div class="mentor-details">
+                        <img src="{{url_for('static',filename='mentor.jpg')}}" alt="Mentor Photo">
+                        <p>Name:Shantanu Swami</p>
+                        <p>Designation:Mentor  CSD</p>
+                        <p>College: DSATM</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button onclick="alert('+91 7259457206')">Call</button>
+                        <button onclick="alert('hod-csd@dsatm.edu.in')">Email</button>
+                    </div>
+                </div>
+            </div>
+            <div class="grid5">
+                <div class="container">
+                    <h1>Weekly Schedule</h1>
+                    <div class="week">
+                        <div class="date">Aug 1</div>
+                        <div class="details">Creative Problem-Solving Workshop</div>
+                    </div>
+                    <div class="week">
+                        <div class="date">Aug 2</div>
+                        <div class="details">Visual Techniques</div>
+                    </div>
+                    <div class="week">
+                        <div class="date">Aug 3</div>
+                        <div class="details">Innovation coding</div>
+                    </div>
+                    <div class="week">
+                        <div class="date">Aug 4</div>
+                        <div class="details">Problem solving</div>
+                    </div>
+                    <div class="week">
+                        <div class="date">Aug 5</div>
+                        <div class="details">Idea presentation</div>
+                    </div>
+                    <div class="week">
+                        <div class="date">Aug 6</div>
+                        <div class="details">Design Thinking</div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid6">
+                <div class="assignments-container">
+                    <h2>Assignments</h2>
+                    <div class="assignment">
+                        <p>Assignment 1</p>
+                        <span class="status pending" onclick="toggleStatus(this)">Pending</span>
+                    </div>
+                    <div class="assignment">
+                        <p>Assignment 2</p>
+                        <span class="status submitted" onclick="toggleStatus(this)">Submitted</span>
+                    </div>
+                    <div class="assignment">
+                        <p>Assignment 3</p>
+                        <span class="status pending" onclick="toggleStatus(this)">Pending</span>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleStatus(element) {
+                        if (element.classList.contains('pending')) {
+                            element.classList.remove('pending');
+                            element.classList.add('submitted');
+                            element.textContent = 'Submitted';
+                        } else {
+                            element.classList.remove('submitted');
+                            element.classList.add('pending');
+                            element.textContent = 'Pending';
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,606 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    background-color: black;
+
+}
+
+main {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: black;
+    background-image: url("/noise.png");
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("/noise.png");
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff62;
+    font-size: 32px;
+    margin-top: 0;
+}
+
+.navbar {
+    background-color: black;
+    overflow: hidden;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: 0.3s;
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.navbar li a::before,
+.navbar li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #0f0, #40e0d0);
+    transition: 0.5s;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+/*this is for hover animation in nav bar*/
+.navbar li a::after {
+    transform-origin: left;
+}
+
+.navbar li a:hover::before,
+.navbar li a:hover::after,
+.navbar li a.active::before,
+.navbar li a.active::after {
+    transform: scaleX(1);
+}
+
+.navbar li a:hover,
+.navbar li a.active {
+    color: #0ff;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    background-image: url("/noise.png");
+}
+
+.notification {
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.notification .badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0);
+    color: white;
+    font-size: 75%;
+}
+
+.main-shapes {
+    filter: blur(60px);
+    border: #40E0D0 2px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+@keyframes dash {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: 10;
+    }
+}
+
+.shape4 {
+    position: absolute;
+    top: 0px;
+    left: 230px;
+    width: 480px;
+    height: 630px;
+    background-color: #3dccc73e;
+    rotate: 18deg;
+    animation: spin 60s linear infinite;
+}
+
+.shape3 {
+    position: absolute;
+    top: 0px;
+    left: 460px;
+    width: 480px;
+    height: 630px;
+    background-color: #68d8d63e;
+    rotate: 36deg;
+    animation: spin 60s linear infinite;
+}
+
+.shape1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 480px;
+    height: 630px;
+    background-color: #07beb83e;
+    animation: spin 60s linear infinite;
+}
+
+.shape2 {
+    position: absolute;
+    top: 0px;
+    left: 690px;
+    width: 480px;
+    height: 630px;
+    background-color: #9ce9ef3e;
+    rotate: 54deg;
+    animation: spin 60s linear infinite;
+}
+
+.shape5 {
+    position: absolute;
+    top: 00px;
+    left: 920px;
+    width: 480px;
+    height: 630px;
+    background-color: #c4fff93e;
+    rotate: 72deg;
+    animation: spin 60s linear infinite;
+}
+
+.wrapper {
+    display: grid;
+    margin: 20px auto;
+    max-width: 1920px;
+    grid-template-columns: repeat(34, 1fr);
+    grid-auto-rows: minmax(100px, 140px);
+    grid-gap: 20px;
+    background: transparent;
+    border-color: 1px solid black;
+    background-image: url("/noise.png");
+}
+
+.grid1,
+.grid2,
+.grid3,
+.grid4,
+.grid5,
+.grid6 {
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 5px 5px 7px #40e0d099;
+    backdrop-filter: blur(15px);
+    transition: transform 1.25s;
+}
+
+.grid1:hover,
+.grid2:hover,
+.grid3:hover,
+.grid4:hover,
+.grid5:hover,
+.grid6:hover {
+    transform: scale(1.04);
+    border-color: #d3d3d3;
+    box-shadow: 5px 5px 10px #40e0d096;
+}
+
+.grid1 {
+    grid-column: 1 / 10;
+    grid-row: 1 / 2;
+    overflow: auto;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-item {
+    background-color: transparent;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: #fff;
+    position: relative;
+}
+
+.progress-item::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 80%;
+    height: 4px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.progress-bar {
+    width: 95%;
+    height: 10px;
+    background: #444;
+    border-radius: 5px;
+    overflow: auto;
+    margin-top: 5px;
+    position: relative;
+}
+
+.progress-bar span {
+    display: block;
+    height: 100%;
+    background: teal;
+    width: 0;
+    /* This will be updated with JavaScript */
+    transition: width 0.3s;
+}
+
+.grid2 {
+    grid-column: 10 / 27;
+    grid-row: 1 / 3;
+    overflow: auto;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+svg {
+    display: block;
+    width: 50%;
+    height: 80%;
+    margin: 0 auto;
+}
+
+circle {
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+    /* Smooth transition for dash offset */
+}
+
+/* Animation for progress rings */
+
+.plusButton {
+    /* Config start */
+    font-family: Arial, sans-serif;
+    --plus_sideLength: 2.5rem;
+    --plus_topRightTriangleSideLength: 0.9rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    width: var(--plus_sideLength);
+    height: var(--plus_sideLength);
+    background-color: #000000;
+    overflow: hidden;
+    left: 90%;
+    bottom: -10px;
+    border-radius: 50%;
+}
+
+.plusButton::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
+    border-style: solid;
+    border-color: transparent white transparent transparent;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+
+.plusButton:hover {
+    cursor: pointer;
+}
+
+.plusButton:hover::before {
+    --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+}
+
+.plusButton:focus-visible::before {
+    --plus_topRightTriangleSideLength: calc(var(--plus_sideLength) * 2);
+}
+
+.plusButton>.plusIcon {
+    fill: white;
+    width: calc(var(--plus_sideLength) * 0.7);
+    height: calc(var(--plus_sideLength) * 0.7);
+    z-index: 1;
+    transition-timing-function: ease-in-out;
+    transition-duration: 0.2s;
+}
+
+.plusButton:hover>.plusIcon {
+    fill: black;
+    transform: rotate(180deg);
+}
+
+.plusButton:focus-visible>.plusIcon {
+    fill: black;
+    transform: rotate(180deg);
+}
+
+.card {
+    width: 95%;
+    height:90%;
+    border-radius: 4px;
+    background: #00000000;
+    display: grid;
+    gap: 5px;
+    padding: 10px;
+    display: none;
+    /* Initially hidden */
+}
+
+.card p {
+    height: 100%;
+    flex: 1;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all .5s;
+    background: rgba(0, 0, 0, 0);
+    border: 1px solid #94fbfd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card p:hover {
+    flex: 4;
+}
+
+.card p span {
+    min-width:20%;
+    text-align: center;
+    transform: rotate(-90deg);
+    transition: all 1.25s;
+    text-transform: uppercase;
+    color: #56fff4;
+    letter-spacing: .1em;
+}
+
+.card p:hover span {
+    transform: rotate(0);
+}
+
+.grid3 {
+    grid-column: 27 / 37;
+    grid-row: 1 / 3;
+    overflow: auto;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.todo-block {
+    width: 100%;
+    height: 100%;
+    background-color:transparent;
+    border-radius: 20px;
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.todo-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 250px;
+}
+
+.todo-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.todo-list li input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#new-item-input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #464646;
+    border-radius: 10px;
+    background-color: #444444;
+    color: #f3e7e7;
+    margin-bottom: 10px;
+}
+
+button.noselect {
+    width: 100px;
+    height: 33px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: #e62222;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    margin-left: 60%;
+}
+
+button,
+button span {
+    transition: 200ms;
+}
+
+button .text {
+    transform: translateX(20px);
+    color: white;
+    font-weight: bold;
+}
+
+button .icon {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(65px);
+    height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button svg {
+    width: 15px;
+    fill: #eee;
+}
+
+button:hover {
+    background: #ff3636;
+}
+
+button:hover .text {
+    color: transparent;
+}
+
+button:hover .icon {
+    width: 100px;
+    border-left: none;
+    transform: translateX(0);
+}
+
+button:focus {
+    outline: none;
+}
+
+button:active .icon svg {
+    transform: scale(0.8);
+}
+.grid4 {
+    grid-column: 1 / 10;
+    grid-row: 2 / 5;
+}
+.mentor-info {
+    width: 100%; /* Adjusted width */
+    height: 100%; /* Adjusted height */
+    background-color: transparent; /* Dark background for the container */
+    box-sizing: border-box;
+    overflow-y: auto; 
+    overflow-x: hidden; /* Disable horizontal scrolling */
+    position: relative;
+}
+.mentor-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    color: #fff; /* White text color */
+}
+
+.mentor-details img {
+    width: 150px; /* Adjusted photo size */
+    height: 150px; /* Adjusted photo size */
+    border-radius: 50%; /* Circular border for photo */
+    margin-bottom: 10px;
+}
+
+.mentor-details p {
+    margin: 5px 0;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.action-buttons button {
+    margin: 0 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #007874;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.grid5 {
+    grid-column: 10 / 27;
+    grid-row: 3 / 5;
+    overflow: auto;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.week {
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.date {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #40E0D0;
+    padding: 5% 5%;
+    border: #40E0D0 2px;
+    border-radius: 5px;
+    width: 4.17%;
+    height: 5.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.details {
+    padding: 5%;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+.grid6 {
+    grid-column: 27 / 37;
+    grid-row: 3 / 5;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
